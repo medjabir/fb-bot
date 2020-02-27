@@ -241,7 +241,7 @@ function SendMessage(sender_psid, message) {
 			}
 		  };
 
-		  callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
 	} else if (message === 1) {
 		let response = {
@@ -275,7 +275,7 @@ function SendMessage(sender_psid, message) {
 			}
 		  };
 
-		  callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
 	} else if (message === 2) {
 		let response = {
@@ -306,7 +306,7 @@ function SendMessage(sender_psid, message) {
 			}
 		  };
 
-		  callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
 	} else if (message === 3) {
 		let response = {
@@ -337,7 +337,7 @@ function SendMessage(sender_psid, message) {
 			}
 		  };
 
-		  callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
 	} else if (message === 4) {
 		let response = {
@@ -368,14 +368,14 @@ function SendMessage(sender_psid, message) {
 			}
 		  };
 
-		  callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
 	} else {
 		let response = {
 			text: `Text ${message}`
 		};
 
-		callSendAPI(sender_psid, response, PAGE_ACCESS_TOKEN);
+		callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 	}
 }
 
