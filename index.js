@@ -91,22 +91,20 @@ app.post("/jabir_webhook", (req, res) => {
 						});
 	
 						newUser.save().then(() => console.log('New User -> '+sender_psid));
+
+						for (var i = 0; i < 5; i++) {
+
+							var messageTimestamp = 60000 * parseInt(message_time[i]);
+	
+							newNotification = new Notification({
+								fbuserid: sender_psid,
+								messageTimestamp: messageTimestamp,
+								message: i
+							});
+	
+							newNotification.save();
+						}
 					}
-				});
-
-					for (var i = 0; i < 5; i++) {
-
-						var messageTimestamp = 60000 * parseInt(message_time[i]);
-
-						newNotification = new Notification({
-							fbuserid: sender_psid,
-							messageTimestamp: messageTimestamp,
-							message: i
-						});
-
-						newNotification.save();
-					}
-
 				});
 
 				/* Notification.find(function (err, notifications) {
