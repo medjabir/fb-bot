@@ -7,7 +7,6 @@ require ('dotenv').config();
 let User = require(__dirname+'/user.model.js');
 let Notification = require(__dirname+'/notification.model.js');
 
-//app = express().use(bodyParser.json());
 app = express();
 app.use(express.json());
 
@@ -23,37 +22,7 @@ db.once('open', () => {
 	console.log('MongoDB connection established');
 });
 
-
-
-/* const newNotification = new Notification({
-	fbuserid: "123",
-	timestamp: "456456",
-	textSentTime: "Ok"
-}); */
-
-/* newNotification.save()
-.then(() => console.log('Notification added'))
-.catch(err => console.log('Error : '+err)); */
-
-// let NotificationData = [];
-
-// Notification.find(function (err, notifications) {
-// 	if (err) return console.error(err);
-
-// 	if(notifications) {
-// 		notifications.forEach(notification => {
-// 			//console.log('Added :'+ notification.timestamp);
-// 			NotificationData.push(notification);
-// 		});
-// 	}
-// });
-
-
-
-/* Notification.find( { timestamp: '456456' } )
-.then(notification => console.log(notification[0].fbuserid)); */
-
-app.get("/test_jabir", (req, res) => { res.send('JABIR bot is working ...' + process.env.VERIFY_TOKEN); });
+app.get("/test_jabir", (req, res) => { res.send('JABIR bot is working ...'); });
 
 app.post("/jabir_webhook", (req, res) => {
 	let body = req.body;
@@ -108,16 +77,6 @@ app.post("/jabir_webhook", (req, res) => {
 					}
 				});
 
-				/* Notification.find(function (err, notifications) {
-					if(err) console.error(err);
-
-					if(notifications) {
-						notifications.forEach(notification => {
-							SendMessage(sender_psid, notification.message);
-						});
-					}
-				}); */
-
 			}
 
 		});
@@ -128,7 +87,6 @@ app.post("/jabir_webhook", (req, res) => {
 		// Returns a '404 Not Found' if event is not from a page subscription
 		res.sendStatus(404);
 	}
-
 
 });
 
