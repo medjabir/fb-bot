@@ -52,6 +52,8 @@ db.once('open', () => {
 /* Notification.find( { timestamp: '456456' } )
 .then(notification => console.log(notification[0].fbuserid)); */
 
+app.get("/test_jabir", (req, res) => { res.send('JABIR bot is working ...'); });
+
 app.post("/jabir_webhook", (req, res) => {
 	let body = req.body;
 
