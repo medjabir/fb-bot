@@ -81,14 +81,18 @@ app.post("/jabir_webhook", (req, res) => {
 				
 				User.findOne({ fbuserid: sender_psid })
 				// .then(user => console.log('Old user -> '+sender_psid))
-				.then(user => console.log(user))
-				.catch(() => {
-					const newUser = new User({
-						fbuserid: sender_psid,
-						signupTimestamp: userTime
-					});
-
-					newUser.save().then(() => console.log('New User -> '+sender_psid));
+				.then(user => {
+					if(user) {
+						console.log('Old user -> '+sender_psid);
+					} else {
+						const newUser = new User({
+							fbuserid: sender_psid,
+							signupTimestamp: userTime
+						});
+	
+						newUser.save().then(() => console.log('New User -> '+sender_psid));
+					}
+				});
 
 					for (var i = 0; i < 5; i++) {
 
