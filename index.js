@@ -94,7 +94,7 @@ app.post("/jabir_webhook", (req, res) => {
 
 						for (var i = 0; i < 5; i++) {
 
-							var messageTimestamp = 60000 * parseInt(message_time[i]);
+							var messageTimestamp = userTime +60000 * parseInt(message_time[i]);
 	
 							newNotification = new Notification({
 								fbuserid: sender_psid,
@@ -186,6 +186,8 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 function check() {
 
 	let currentTime = Math.round(new Date().getTime() / 1000 / 60) * 1000 * 60;
+
+	console.log(currentTime);
 
 	Notification.find({ messageTimestamp: currentTime })
 	.then(notifications => {
