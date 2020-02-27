@@ -80,7 +80,8 @@ app.post("/jabir_webhook", (req, res) => {
 				message_time[4] = process.env.messageTime5;
 				
 				User.findOne({ fbuserid: sender_psid })
-				.then(user => console.log('Old user -> '+sender_psid))
+				// .then(user => console.log('Old user -> '+sender_psid))
+				.then(user => console.log(user))
 				.catch(() => {
 					const newUser = new User({
 						fbuserid: sender_psid,
