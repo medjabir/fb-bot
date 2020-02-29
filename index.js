@@ -9,7 +9,7 @@ let Notification = require(__dirname+'/notification.model.js');
 app = express();
 app.use(express.json());
 
-app.listen(process.env.PORT || 1337, () => console.log("Server running 1337"));
+app.listen(process.env.PORT || 1337, () => console.log(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT));
 
 //DB connection
 const db_uri = process.env.DB_URI;
@@ -21,7 +21,7 @@ db.once('open', () => {
 	console.log('MongoDB connection established');
 });
 
-app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' Is listening on port :'+process.env.PORT); });
+app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT); });
 
 app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 	let body = req.body;
