@@ -21,9 +21,9 @@ db.once('open', () => {
 	console.log('MongoDB connection established');
 });
 
-app.get("/test_jabir", (req, res) => { res.send('JABIR bot is working ...'); });
+app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' Is listening on port :'+process.env.PORT); });
 
-app.post("/jabir_webhook", (req, res) => {
+app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 	let body = req.body;
 
 	if (body.object === "page") {
@@ -89,7 +89,7 @@ app.post("/jabir_webhook", (req, res) => {
 
 });
 
-app.get("/jabir_webhook", (req, res) => {
+app.get("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 
   	// Your verify token. Should be a random string.
 
