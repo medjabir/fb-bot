@@ -187,7 +187,7 @@ function SendMessage(sender_psid, message) {
 					  },
 					  {
 						type: "web_url",
-						url: "https://fb.gg/play/339112736787442",
+						url: "https://fb.gg/play/523078621874550",
 						title: "More Games"
 					  }
 					]
@@ -223,6 +223,11 @@ function SendMessage(sender_psid, message) {
 						  id: "",
 						  bot_coin: 0
 						})
+					  },
+					  {
+						type: "web_url",
+						url: "https://fb.gg/play/523078621874550",
+						title: "More Games"
 					  }
 					]
 				  }
@@ -254,6 +259,11 @@ function SendMessage(sender_psid, message) {
 						payload: JSON.stringify({
 						  top: 0
 						})
+					  },
+					  {
+						type: "web_url",
+						url: "https://fb.gg/play/523078621874550",
+						title: "More Games"
 					  }
 					]
 				  }
@@ -285,6 +295,11 @@ function SendMessage(sender_psid, message) {
 						payload: JSON.stringify({
 						  bot_data: 0
 						})
+					  },
+					  {
+						type: "web_url",
+						url: "https://fb.gg/play/523078621874550",
+						title: "More Games"
 					  }
 					]
 				  }
@@ -316,6 +331,11 @@ function SendMessage(sender_psid, message) {
 						payload: JSON.stringify({
 						  bot_data: 0
 						})
+					  },
+					  {
+						type: "web_url",
+						url: "https://fb.gg/play/523078621874550",
+						title: "More Games"
 					  }
 					]
 				  }
