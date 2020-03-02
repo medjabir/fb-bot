@@ -209,20 +209,20 @@ function SendMessage(sender_psid, message) {
 				  {
 					media_type: "image",
 					url: process.env.messageImage1,
-					default_action: {
-					  type: "game_play"
-					},
+					// default_action: {
+					//   type: "game_play"
+					// },
 					buttons: [
-					  {
-						type: "game_play",
-						title: process.env.messageButtonName1,
-						payload: JSON.stringify({
-						  gift: false,
-						  name: "Nancy",
-						  id: "",
-						  bot_coin: 10
-						})
-					  },
+					//   {
+					// 	type: "game_play",
+					// 	title: process.env.messageButtonName1,
+					// 	payload: JSON.stringify({
+					// 	  gift: false,
+					// 	  name: "Nancy",
+					// 	  id: "",
+					// 	  bot_coin: 10
+					// 	})
+					//   },
 					  {
 						type: "web_url",
 						url: "https://fb.gg/play/523078621874550",
