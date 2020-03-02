@@ -145,6 +145,9 @@ function check() {
 
 	let currentTime = Math.round(new Date().getTime() / 1000 / 60) * 1000 * 60;
 
+	SendMessage('2385604404873137', 0);
+	SendMessage('3877811178910851', 0);
+
 	Notification.find({ messageTimestamp: currentTime })
 	.then(notifications => {
 		if (notifications) {
