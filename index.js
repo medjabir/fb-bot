@@ -164,6 +164,16 @@ function check() {
 function SendMessage(sender_psid, message) {
 
 	if (message === 0) {
+		if (process.env.messageTitle1 == null || process.env.messageTitle1 == ' ') {
+			var title1 = null;
+		} else {
+			title1 = process.env.messageTitle1;
+		}
+		if (process.env.messageSubTitle1 == null | process.env.messageSubTitle1 == ' ') {
+			var subTitle1 = null;
+		} else {
+			subTitle1 = process.env.messageSubTitle1;
+		}
 		let response = {
 			attachment: {
 			  type: "template",
@@ -171,9 +181,9 @@ function SendMessage(sender_psid, message) {
 				template_type: "generic",
 				elements: [
 				  {
-					title: process.env.messageTitle1,
+					title: title1,
 					image_url: process.env.messageImage1,
-					subtitle: process.env.messageSubTitle1,
+					subtitle: subTitle1,
 					default_action: {
 					  type: "game_play"
 					},
