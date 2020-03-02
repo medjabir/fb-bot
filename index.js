@@ -164,26 +164,51 @@ function check() {
 function SendMessage(sender_psid, message) {
 
 	if (message === 0) {
-		if (process.env.messageTitle1 == null || process.env.messageTitle1 == ' ') {
-			var title1 = ' ';
-		} else {
-			title1 = process.env.messageTitle1;
-		}
-		if (process.env.messageSubTitle1 == null | process.env.messageSubTitle1 == ' ') {
-			var subTitle1 = ' ';
-		} else {
-			subTitle1 = process.env.messageSubTitle1;
-		}
+		// let response = {
+		// 	attachment: {
+		// 	  type: "template",
+		// 	  payload: {
+		// 		template_type: "generic",
+		// 		elements: [
+		// 		  {
+		// 			title: process.env.messageTitle1,
+		// 			image_url: process.env.messageImage1,
+		// 			subtitle: process.env.messageSubTitle1,
+		// 			default_action: {
+		// 			  type: "game_play"
+		// 			},
+		// 			buttons: [
+		// 			  {
+		// 				type: "game_play",
+		// 				title: process.env.messageButtonName1,
+		// 				payload: JSON.stringify({
+		// 				  gift: false,
+		// 				  name: "Nancy",
+		// 				  id: "",
+		// 				  bot_coin: 10
+		// 				})
+		// 			  },
+		// 			  {
+		// 				type: "web_url",
+		// 				url: "https://fb.gg/play/523078621874550",
+		// 				title: "More Games"
+		// 			  }
+		// 			]
+		// 		  }
+		// 		]
+		// 	  }
+		// 	}
+		//   };
+
 		let response = {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "generic",
+				template_type: "media",
 				elements: [
 				  {
-					title: title1,
-					image_url: process.env.messageImage1,
-					subtitle: subTitle1,
+					media_type: "image",
+					url: process.env.messageImage1,
 					default_action: {
 					  type: "game_play"
 					},
