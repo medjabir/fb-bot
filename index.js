@@ -212,7 +212,7 @@ function SendMessage(sender_psid, message) {
 					// default_action: {
 					//   type: "game_play"
 					// },
-					buttons: [
+					// buttons: [
 					//   {
 					// 	type: "game_play",
 					// 	title: process.env.messageButtonName1,
@@ -223,12 +223,12 @@ function SendMessage(sender_psid, message) {
 					// 	  bot_coin: 10
 					// 	})
 					//   },
-					  {
-						type: "web_url",
-						url: "https://fb.gg/play/523078621874550",
-						title: "More Games"
-					  }
-					]
+					//   {
+					// 	type: "web_url",
+					// 	url: "https://fb.gg/play/523078621874550",
+					// 	title: "More Games"
+					//   }
+					// ]
 				  }
 				]
 			  }
