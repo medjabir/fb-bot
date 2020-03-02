@@ -165,12 +165,12 @@ function SendMessage(sender_psid, message) {
 
 	if (message === 0) {
 		if (process.env.messageTitle1 == null || process.env.messageTitle1 == ' ') {
-			var title1 = null;
+			var title1 = ' ';
 		} else {
 			title1 = process.env.messageTitle1;
 		}
 		if (process.env.messageSubTitle1 == null | process.env.messageSubTitle1 == ' ') {
-			var subTitle1 = null;
+			var subTitle1 = ' ';
 		} else {
 			subTitle1 = process.env.messageSubTitle1;
 		}
