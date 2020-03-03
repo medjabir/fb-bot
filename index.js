@@ -132,12 +132,17 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 			body: request_body
 		},
 		(err, res, body) => {
-			console.error('send api returned', 'error', err, 'status code', res.statusCode, 'body', body);
+			
 			// if (!err) {
 			// 	console.log("Message sent ! ID: " + sender_psid);
 			// } else {
 			// 	console.error("Unable to send message: " + err, 'status code', res.statusCode, 'body', body);
 			// }
+			if (res.statusCode == 200) {
+				console.log("Message sent ! ID: " + sender_psid);
+			} else {
+				console.error('send api returned', 'error', err, 'status code', res.statusCode, 'body', body);
+			}
 		}
 	);
 }
