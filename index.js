@@ -128,13 +128,14 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 			uri: "https://graph.facebook.com/v2.6/me/messages",
 			qs: { access_token: game_page_access_token },
 			method: "POST",
-			json: request_body
+			json: true,
+			body: request_body
 		},
 		(err, res, body) => {
 			if (!err) {
 				console.log("Message sent ! ID: " + sender_psid);
 			} else {
-				console.error("Unable to send message: " + err);
+				console.error("Unable to send message: " + err, 'status code', res.statusCode, 'body', body);
 			}
 		}
 	);
