@@ -205,11 +205,11 @@ function SendMessage(sender_psid, message) {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "media",
+				template_type: "generic",
 				elements: [
 				  {
-					media_type: "image",
-					url: process.env.messageImage1,
+					title: "test",
+					image_url: process.env.messageImage1,
 					// default_action: {
 					//   type: "game_play"
 					// },
