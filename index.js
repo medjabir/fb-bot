@@ -39,7 +39,7 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 			let times_stamp = webhook_event.timestamp;
 			let sender_psid = webhook_event.sender.id;
 
-			console.log("Sender PSID : " + sender_psid);
+			// console.log("Sender PSID : " + sender_psid);
 
 			if (webhook_event.game_play) {
 
