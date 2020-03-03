@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const request = require("request");
+const chalk = require("chalk");
 require ('dotenv').config();
 
 let User = require(__dirname+'/user.model.js');
@@ -9,7 +10,11 @@ let Notification = require(__dirname+'/notification.model.js');
 app = express();
 app.use(express.json());
 
-app.listen(process.env.PORT || 1337, () => console.log(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT));
+app.listen(process.env.PORT || 1337, () => {
+	console.log(chalk.bgGreen.black(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT));
+}).on('error', (err) => {
+	console.log(chalk.bgRed.black('Couldn\'t listen on port : '+process.env.PORT));
+});
 
 //DB connection
 const db_uri = process.env.DB_URI;
@@ -18,7 +23,7 @@ mongoose.connect(db_uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.once('open', () => {
-	console.log('MongoDB connection established');
+	console.log(chalk.bgGreen.black('MongoDB connection established'));
 });
 
 app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT); });
@@ -52,14 +57,14 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 				// .then(user => console.log('Old user -> '+sender_psid))
 				.then(user => {
 					if(user) {
-						console.log('Old user -> '+sender_psid);
+						console.log(chalk.yellow('Old user -> '+sender_psid));
 					} else {
 						const newUser = new User({
 							fbuserid: sender_psid,
 							signupTimestamp: userTime
 						});
 	
-						newUser.save().then(() => console.log('New User -> '+sender_psid));
+						newUser.save().then(() => console.log(chalk.green('New User -> '+sender_psid)));
 
 						for (var i = 0; i < 5; i++) {
 
@@ -103,7 +108,7 @@ app.get("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 		//Checks the mode and token sent is correct
 		if (mode === "subscribe" && token === process.env.VERIFY_TOKEN ) {
 			//Responds with the challenge token from the request
-			console.log("WEBHOOK_VERIFIED");
+			console.log(chalk.bgGreen.black('WEBHOOK_VERIFIED'));
 			res.status(200).send(challenge);
 		} else {
 			//Responds with '403 Forbidden' if verify tokens do not match
@@ -133,15 +138,10 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 		},
 		(err, res, body) => {
 			
-			// if (!err) {
-			// 	console.log("Message sent ! ID: " + sender_psid);
-			// } else {
-			// 	console.error("Unable to send message: " + err, 'status code', res.statusCode, 'body', body);
-			// }
 			if (res.statusCode == 200) {
-				console.log("Message sent ! ID: " + sender_psid);
+				console.log(chalk.green("Message sent ! ID: " + sender_psid));
 			} else {
-				console.error('send api returned', 'error', err, 'status code', res.statusCode, 'body', body);
+				console.error(chalk.bgRed.black('Error : '+body.error.message));
 			}
 		}
 	);
@@ -152,8 +152,8 @@ function check() {
 
 	let currentTime = Math.round(new Date().getTime() / 1000 / 60) * 1000 * 60;
 
-	SendMessage('2385604404873137', 0);
-	SendMessage('3877811178910851', 0);
+	// SendMessage('2385604404873137', 0);
+	// SendMessage('3877811178910851', 0);
 
 	Notification.find({ messageTimestamp: currentTime })
 	.then(notifications => {
@@ -161,8 +161,7 @@ function check() {
 			notifications.forEach(notification => {
 				SendMessage(notification.fbuserid, notification.message);
 				//console.log(notification);
-			Notification.findByIdAndDelete({ _id: notification._id })
-			.then(() => console.log('Deleted !'));
+			Notification.findByIdAndDelete({ _id: notification._id });
 			});
 		}
 	})
@@ -171,42 +170,6 @@ function check() {
 function SendMessage(sender_psid, message) {
 
 	if (message === 0) {
-		// let response = {
-		// 	attachment: {
-		// 	  type: "template",
-		// 	  payload: {
-		// 		template_type: "generic",
-		// 		elements: [
-		// 		  {
-		// 			title: process.env.messageTitle1,
-		// 			image_url: process.env.messageImage1,
-		// 			subtitle: process.env.messageSubTitle1,
-		// 			default_action: {
-		// 			  type: "game_play"
-		// 			},
-		// 			buttons: [
-		// 			  {
-		// 				type: "game_play",
-		// 				title: process.env.messageButtonName1,
-		// 				payload: JSON.stringify({
-		// 				  gift: false,
-		// 				  name: "Nancy",
-		// 				  id: "",
-		// 				  bot_coin: 10
-		// 				})
-		// 			  },
-		// 			  {
-		// 				type: "web_url",
-		// 				url: "https://fb.gg/play/523078621874550",
-		// 				title: "More Games"
-		// 			  }
-		// 			]
-		// 		  }
-		// 		]
-		// 	  }
-		// 	}
-		//   };
-
 		let response = {
 			attachment: {
 			  type: "template",
@@ -214,33 +177,25 @@ function SendMessage(sender_psid, message) {
 				template_type: "media",
 				elements: [
 				  {
-					media_type: "image",
+					media_type: "video",
 					url: process.env.messageImage1,
-					// default_action: {
-					//   type: "game_play"
-					// },
-					// buttons: [
-					//   {
-					// 	type: "game_play",
-					// 	title: process.env.messageButtonName1,
-					// 	payload: JSON.stringify({
-					// 	  gift: false,
-					// 	  name: "Nancy",
-					// 	  id: "",
-					// 	  bot_coin: 10
-					// 	})
-					//   },
-					//   {
-					// 	type: "web_url",
-					// 	url: "https://fb.gg/play/523078621874550",
-					// 	title: "More Games"
-					//   }
-					// ]
+					buttons: [
+					   {
+					 	type: "game_play",
+					 	title: process.env.messageButtonName1,
+					 	payload: JSON.stringify({
+					 	  gift: false,
+					 	  name: "Nancy",
+					 	  id: "",
+					 	  bot_coin: 10
+					 	})
+					   }
+					]
 				  }
 				]
 			  }
 			}
-		  };
+		};
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
