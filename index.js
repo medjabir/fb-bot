@@ -141,7 +141,11 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 			if (res.statusCode == 200) {
 				console.log(chalk.green("Message sent ! ID: " + sender_psid));
 			} else {
-				console.error(chalk.bgRed.black('Error : '+body.error.message));
+				if (body.error.code == 100 && body.error.error_subcode == 2018144) {
+					console.error(chalk.red('Error : Cannot send to user '+sender_psid+' at this time'));
+				} else {
+					console.error(chalk.bgRed.black('Error : '+body.error.message));
+				}
 			}
 		}
 	);
