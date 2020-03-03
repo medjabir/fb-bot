@@ -125,7 +125,7 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 	//Send the HTTP request to the Messenger Platform
 	request(
 		{
-			uri: "https://graph.facebook.com/v2.6/me/messages",
+			uri: "https://graph.facebook.com/me/messages",
 			qs: { access_token: game_page_access_token },
 			method: "POST",
 			json: true,
