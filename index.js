@@ -182,49 +182,19 @@ function SendMessage(sender_psid, message) {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "media",
-				elements: [
-				  {
-					media_type: "video",
-					url: process.env.messageImage1,
-					buttons: [
-					   {
-					 	type: "game_play",
-					 	title: process.env.messageButtonName1,
-					 	payload: JSON.stringify({
-					 	  gift: false,
-					 	  name: "Nancy",
-					 	  id: "",
-					 	  bot_coin: 10
-					 	})
-					   }
-					]
-				  }
-				]
-			  }
-			}
-		};
-
-		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
-
-	} else if (message === 1) {
-		let response = {
-			attachment: {
-			  type: "template",
-			  payload: {
 				template_type: "generic",
 				elements: [
 				  {
-					title: process.env.messageTitle2,
-					image_url: process.env.messageImage2,
-					subtitle: process.env.messageSubTitle2,
+					title: process.env.messageTitle1,
+					image_url: process.env.messageImage1,
+					subtitle: process.env.messageSubTitle1,
 					default_action: {
 					  type: "game_play"
 					},
 					buttons: [
 					  {
 						type: "game_play",
-						title: process.env.messageButtonName2,
+						title: process.env.messageButtonName1,
 						payload: JSON.stringify({
 						  gift: true,
 						  name: "Nancy",
@@ -243,6 +213,38 @@ function SendMessage(sender_psid, message) {
 			  }
 			}
 		  };
+		
+
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
+
+	} else if (message === 1) {
+		
+		let response = {
+			attachment: {
+			  type: "template",
+			  payload: {
+				template_type: "media",
+				elements: [
+				  {
+					media_type: "video",
+					url: process.env.messageImage2,
+					buttons: [
+					   {
+					 	type: "game_play",
+					 	title: process.env.messageButtonName2,
+					 	payload: JSON.stringify({
+					 	  gift: false,
+					 	  name: "Nancy",
+					 	  id: "",
+					 	  bot_coin: 10
+					 	})
+					   }
+					]
+				  }
+				]
+			  }
+			}
+		};
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
@@ -251,34 +253,28 @@ function SendMessage(sender_psid, message) {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "generic",
+				template_type: "media",
 				elements: [
 				  {
-					title: process.env.messageTitle3,
-					image_url: process.env.messageImage3,
-					subtitle: process.env.messageSubTitle3,
-					default_action: {
-					  type: "game_play"
-					},
+					media_type: "video",
+					url: process.env.messageImage3,
 					buttons: [
-					  {
-						type: "game_play",
-						title: process.env.messageButtonName3,
-						payload: JSON.stringify({
-						  top: 0
-						})
-					  },
-					  {
-						type: "web_url",
-						url: "https://fb.gg/play/523078621874550",
-						title: "More Games"
-					  }
+					   {
+					 	type: "game_play",
+					 	title: process.env.messageButtonName3,
+					 	payload: JSON.stringify({
+					 	  gift: false,
+					 	  name: "Nancy",
+					 	  id: "",
+					 	  bot_coin: 10
+					 	})
+					   }
 					]
 				  }
 				]
 			  }
 			}
-		  };
+		};
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
@@ -287,34 +283,28 @@ function SendMessage(sender_psid, message) {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "generic",
+				template_type: "media",
 				elements: [
 				  {
-					title: process.env.messageTitle4,
-					image_url: process.env.messageImage4,
-					subtitle: process.env.messageSubTitle4,
-					default_action: {
-					  type: "game_play"
-					},
+					media_type: "video",
+					url: process.env.messageImage4,
 					buttons: [
-					  {
-						type: "game_play",
-						title: process.env.messageButtonName4,
-						payload: JSON.stringify({
-						  bot_data: 0
-						})
-					  },
-					  {
-						type: "web_url",
-						url: "https://fb.gg/play/523078621874550",
-						title: "More Games"
-					  }
+					   {
+					 	type: "game_play",
+					 	title: process.env.messageButtonName4,
+					 	payload: JSON.stringify({
+					 	  gift: false,
+					 	  name: "Nancy",
+					 	  id: "",
+					 	  bot_coin: 10
+					 	})
+					   }
 					]
 				  }
 				]
 			  }
 			}
-		  };
+		};
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
@@ -323,34 +313,28 @@ function SendMessage(sender_psid, message) {
 			attachment: {
 			  type: "template",
 			  payload: {
-				template_type: "generic",
+				template_type: "media",
 				elements: [
 				  {
-					title: process.env.messageTitle5,
-					image_url: process.env.messageImage5,
-					subtitle: process.env.messageSubTitle5,
-					default_action: {
-					  type: "game_play"
-					},
+					media_type: "video",
+					url: process.env.messageImage5,
 					buttons: [
-					  {
-						type: "game_play",
-						title: process.env.messageButtonName5,
-						payload: JSON.stringify({
-						  bot_data: 0
-						})
-					  },
-					  {
-						type: "web_url",
-						url: "https://fb.gg/play/523078621874550",
-						title: "More Games"
-					  }
+					   {
+					 	type: "game_play",
+					 	title: process.env.messageButtonName5,
+					 	payload: JSON.stringify({
+					 	  gift: false,
+					 	  name: "Nancy",
+					 	  id: "",
+					 	  bot_coin: 10
+					 	})
+					   }
 					]
 				  }
 				]
 			  }
 			}
-		  };
+		};
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
