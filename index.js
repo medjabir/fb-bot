@@ -204,8 +204,8 @@ function SendMessage(sender_psid, message) {
 					  },
 					  {
 						type: "web_url",
-						url: "https://fb.gg/play/523078621874550",
-						title: "More Games"
+						url: process.env.urlFanPage,
+						title: "Fan Page"
 					  }
 					]
 				  }
@@ -238,6 +238,11 @@ function SendMessage(sender_psid, message) {
 					 	  id: "",
 					 	  bot_coin: 10
 					 	})
+					   },
+					   {
+						 type: "web_url",
+						 url: process.env.urlFanPage,
+						 title: "Fan Page"
 					   }
 					]
 				  }
@@ -268,6 +273,11 @@ function SendMessage(sender_psid, message) {
 					 	  id: "",
 					 	  bot_coin: 10
 					 	})
+					   },
+					   {
+						 type: "web_url",
+						 url: process.env.urlFanPage,
+						 title: "Fan Page"
 					   }
 					]
 				  }
@@ -298,6 +308,11 @@ function SendMessage(sender_psid, message) {
 					 	  id: "",
 					 	  bot_coin: 10
 					 	})
+					   },
+					   {
+						 type: "web_url",
+						 url: process.env.urlFanPage,
+						 title: "Fan Page"
 					   }
 					]
 				  }
@@ -328,6 +343,11 @@ function SendMessage(sender_psid, message) {
 					 	  id: "",
 					 	  bot_coin: 10
 					 	})
+					   },
+					   {
+						 type: "web_url",
+						 url: process.env.urlFanPage,
+						 title: "Fan Page"
 					   }
 					]
 				  }
