@@ -165,7 +165,11 @@ function check() {
 			notifications.forEach(notification => {
 				SendMessage(notification.fbuserid, notification.message);
 				//console.log(notification);
-			Notification.findByIdAndDelete({ _id: notification._id });
+				Notification.findByIdAndDelete(notification._id, (err, notification) => {
+					if (err) {
+						console.log('Couldn\'t delete the notification');
+					}
+				});
 			});
 		}
 	})
