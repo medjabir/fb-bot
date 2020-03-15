@@ -175,6 +175,23 @@ function check() {
 	})
 }
 
+function bulkNotify() {
+  var usersProccesed = 0;
+
+  User.find().then(users => {
+    users.forEach(user => {
+      SendMessage(user.fbuserid, 100);
+      usersProccesed++;
+      if (usersProccesed === users.length) {
+        console.log(
+          chalk.yellow("Bulk sending finished ! Total sent: " + users.length)
+        );
+        console.log(chalk.yellow("Waiting for facebook response"));
+      }
+    });
+  });
+}
+
 function SendMessage(sender_psid, message) {
 
 	if (message === 0) {
@@ -358,6 +375,46 @@ function SendMessage(sender_psid, message) {
 
 		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
 
+	} else if (message === 100 ) {
+
+		let response = {
+			attachment: {
+			  type: "template",
+			  payload: {
+				template_type: "generic",
+				elements: [
+				  {
+					title: process.env.messageTitle100,
+					image_url: process.env.messageImage100,
+					subtitle: process.env.messageSubTitle100,
+					default_action: {
+					  type: "game_play"
+					},
+					buttons: [
+					  {
+						type: "game_play",
+						title: process.env.messageButtonName100,
+						payload: JSON.stringify({
+						  gift: true,
+						  name: "Nancy",
+						  id: "",
+						  bot_coin: 0
+						})
+					  },
+					  {
+						type: "web_url",
+						url: process.env.urlFanPage,
+						title: "Fan Page"
+					  }
+					]
+				  }
+				]
+			  }
+			}
+		  };
+	
+		  callSendAPI(sender_psid, response, process.env.PAGE_ACCESS_TOKEN);
+
 	} else {
 		let response = {
 			text: `Text ${message}`
@@ -368,3 +425,4 @@ function SendMessage(sender_psid, message) {
 }
 
 module.exports.check = check;
+module.exports.bulkNotify = bulkNotify;
