@@ -47,6 +47,7 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 
 				var message_time = [];
 
+				//Initiate message timestamps
 				message_time[0] = process.env.messageTime1;
 				message_time[1] = process.env.messageTime2;
 				message_time[2] = process.env.messageTime3;
@@ -57,7 +58,26 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 				// .then(user => console.log('Old user -> '+sender_psid))
 				.then(user => {
 					if(user) {
+						
 						console.log(chalk.yellow('Old user -> '+sender_psid));
+
+						//Delete all notification in order to create new ones
+						Notification.deleteMany({ fbuserid: sender_psid }, (err) => {});
+
+						//Create 5 Notification and save them
+						for (var i = 0; i < 5; i++) {
+
+							var messageTimestamp = userTime + 60000 * parseInt(message_time[i]);
+	
+							newNotification = new Notification({
+								fbuserid: sender_psid,
+								messageTimestamp: messageTimestamp,
+								message: i
+							});
+	
+							newNotification.save();
+						}
+
 					} else {
 						const newUser = new User({
 							fbuserid: sender_psid,
@@ -66,9 +86,10 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 	
 						newUser.save().then(() => console.log(chalk.green('New User -> '+sender_psid)));
 
+						//Create 5 Notification and save them
 						for (var i = 0; i < 5; i++) {
 
-							var messageTimestamp = userTime +60000 * parseInt(message_time[i]);
+							var messageTimestamp = userTime + 60000 * parseInt(message_time[i]);
 	
 							newNotification = new Notification({
 								fbuserid: sender_psid,
