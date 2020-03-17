@@ -26,6 +26,15 @@ db.once('open', () => {
 	console.log(chalk.bgGreen.black('MongoDB connection established'));
 });
 
+var message_time = [];
+
+//Initiate message timestamps
+message_time[0] = process.env.messageTime1;
+message_time[1] = process.env.messageTime2;
+message_time[2] = process.env.messageTime3;
+message_time[3] = process.env.messageTime4;
+message_time[4] = process.env.messageTime5;
+
 app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT); });
 
 app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
@@ -44,15 +53,6 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 			if (webhook_event.game_play) {
 
 				let userTime = Math.round(times_stamp / 1000 / 60) * 1000 * 60;
-
-				var message_time = [];
-
-				//Initiate message timestamps
-				message_time[0] = process.env.messageTime1;
-				message_time[1] = process.env.messageTime2;
-				message_time[2] = process.env.messageTime3;
-				message_time[3] = process.env.messageTime4;
-				message_time[4] = process.env.messageTime5;
 				
 				User.findOne({ fbuserid: sender_psid })
 				// .then(user => console.log('Old user -> '+sender_psid))
@@ -185,6 +185,29 @@ function check() {
 		if (notifications) {
 			notifications.forEach(notification => {
 				SendMessage(notification.fbuserid, notification.message);
+
+				if (notification.message === 4) {
+
+					//Calculate timestamp : Current time + 10 days
+					timeAfter10Days = currentTime + 864000000;
+
+					//If this the last notification this user will get, 
+					//generate new notifications that will be sent after 10 days
+					for (var i = 0; i < 5; i++) {
+
+						var messageTimestamp = timeAfter10Days + 60000 * parseInt(message_time[i]);
+
+						newNotification = new Notification({
+							fbuserid: sender_psid,
+							messageTimestamp: messageTimestamp,
+							message: i
+						});
+
+						newNotification.save();
+					}
+
+				}
+
 				//console.log(notification);
 				Notification.findByIdAndDelete(notification._id, (err, notification) => {
 					if (err) {
