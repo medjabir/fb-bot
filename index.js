@@ -193,7 +193,7 @@ function check() {
 
 					//If this the last notification this user will get, 
 					//generate new notifications that will be sent after 10 days
-					for (var i = 0; i < 5; i++) {
+					for (var i = 1; i < 5; i++) {
 
 						var messageTimestamp = timeAfter10Days + 60000 * parseInt(message_time[i]);
 
