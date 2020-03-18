@@ -1,7 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const request = require("request");
+var fs = require('fs');
+var util = require('util');
+var path = require('path');
 const chalk = require("chalk");
+var Convert = require('ansi-to-html');
+var convert = new Convert();
 require ('dotenv').config();
 
 let User = require(__dirname+'/user.model.js');
@@ -9,6 +14,26 @@ let Notification = require(__dirname+'/notification.model.js');
 
 app = express();
 app.use(express.json());
+
+if (fs.exists('./log.html', (file) => {
+	if (file) {
+		// console.log('Loading Log File !');
+	} else {
+		fs.writeFile('./log.html', 
+		"<!DOCTYPE html><html><head><title>"+ process.env.BOT_WEBHOOK_ROUTE +"</title><style>body{background-color: black;} p {font-family: 'Arial', sans-serif;font-size: 10pt;color: white;margin: 0 0 1px 0;}</style></head><body>",
+		() => {});
+	}
+}));
+
+var logFile = fs.createWriteStream('log.html', { flags: 'a' });
+  // Or 'w' to truncate the file every time the process starts.
+var logStdout = process.stdout;
+
+console.log = function () {
+  logFile.write('<p>' + convert.toHtml(util.format.apply(null, arguments)) + '</p>');
+  logStdout.write(util.format.apply(null, arguments) + '\n');
+}
+console.error = console.log;
 
 app.listen(process.env.PORT || 1337, () => {
 	console.log(chalk.bgGreen.black(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT));
@@ -36,6 +61,12 @@ message_time[3] = process.env.messageTime4;
 message_time[4] = process.env.messageTime5;
 
 app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT); });
+
+app.get("/"+"log_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
+	// app.use(express.static(path.join(__dirname,'log.html')));
+	// res.send()
+	res.sendFile(path.join(__dirname, '/log.html'));
+});
 
 app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 	let body = req.body;
