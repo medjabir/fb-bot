@@ -15,6 +15,7 @@ let Notification = require(__dirname+'/notification.model.js');
 app = express();
 app.use(express.json());
 
+//Check if html log file exists, if not create it and append some styling to it
 if (fs.exists('./log.html', (file) => {
 	if (file) {
 		// console.log('Loading Log File !');
@@ -25,16 +26,21 @@ if (fs.exists('./log.html', (file) => {
 	}
 }));
 
+//Open stream and write to the log file
 var logFile = fs.createWriteStream('log.html', { flags: 'a' });
   // Or 'w' to truncate the file every time the process starts.
 var logStdout = process.stdout;
 
+//Override the console.log function
 console.log = function () {
+  //Write to the log file and convert ANSI colors code to HTML codes
   logFile.write('<p>' + convert.toHtml(util.format.apply(null, arguments)) + '</p>');
+  //Write to the console like usual
   logStdout.write(util.format.apply(null, arguments) + '\n');
 }
 console.error = console.log;
 
+//App intiate listening
 app.listen(process.env.PORT || 1337, () => {
 	console.log(chalk.bgGreen.black(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT));
 }).on('error', (err) => {
@@ -60,11 +66,11 @@ message_time[2] = process.env.messageTime3;
 message_time[3] = process.env.messageTime4;
 message_time[4] = process.env.messageTime5;
 
+//Test route via the WEB
 app.get("/"+"test_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => { res.send(process.env.BOT_WEBHOOK_ROUTE+' is listening on port :'+process.env.PORT); });
 
+//Serve the log html file to the WEB
 app.get("/"+"log_"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
-	// app.use(express.static(path.join(__dirname,'log.html')));
-	// res.send()
 	res.sendFile(path.join(__dirname, '/log.html'));
 });
 
@@ -202,7 +208,6 @@ function callSendAPI(sender_psid, response, game_page_access_token) {
 		}
 	);
 }
-
 
 function check() {
 
