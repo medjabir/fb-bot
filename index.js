@@ -198,7 +198,7 @@ function check() {
 						var messageTimestamp = timeAfter10Days + 60000 * parseInt(message_time[i]);
 
 						newNotification = new Notification({
-							fbuserid: sender_psid,
+							fbuserid: notification.fbuserid,
 							messageTimestamp: messageTimestamp,
 							message: i
 						});
