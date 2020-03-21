@@ -102,7 +102,7 @@ app.post("/"+process.env.BOT_WEBHOOK_ROUTE, (req, res) => {
 						Notification.deleteMany({ fbuserid: sender_psid }, (err) => {});
 
 						//Create 5 Notification and save them
-						for (var i = 0; i < 5; i++) {
+						for (var i = 1; i < 5; i++) {
 
 							var messageTimestamp = userTime + 60000 * parseInt(message_time[i]);
 	
@@ -220,29 +220,8 @@ function check() {
 	.then(notifications => {
 		if (notifications) {
 			notifications.forEach(notification => {
+
 				SendMessage(notification.fbuserid, notification.message);
-
-				if (notification.message === 4) {
-
-					//Calculate timestamp : Current time + 10 days
-					timeAfter10Days = currentTime + 864000000;
-
-					//If this the last notification this user will get, 
-					//generate new notifications that will be sent after 10 days
-					for (var i = 1; i < 5; i++) {
-
-						var messageTimestamp = timeAfter10Days + 60000 * parseInt(message_time[i]);
-
-						newNotification = new Notification({
-							fbuserid: notification.fbuserid,
-							messageTimestamp: messageTimestamp,
-							message: i
-						});
-
-						newNotification.save();
-					}
-
-				}
 
 				//console.log(notification);
 				Notification.findByIdAndDelete(notification._id, (err, notification) => {
