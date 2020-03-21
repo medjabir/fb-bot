@@ -238,12 +238,19 @@ function bulkNotify() {
   var usersProccesed = 0;
 
   User.find().then(users => {
-    users.forEach(user => {
-      SendMessage(user.fbuserid, 100);
-      usersProccesed++;
+	
+    users.forEach((user, index) => {
+
+	//Set 2 seconds between a message sent and the next
+	setTimeout(() => { 
+		SendMessage(user.fbuserid, 100) 
+	}, 2000 * (index + 1));
+
+	  usersProccesed++;
+	  
       if (usersProccesed === users.length) {
         console.log(
-          chalk.yellow("Bulk sending finished ! Total sent: " + users.length)
+          chalk.yellow("Total: " + users.length)
         );
         console.log(chalk.yellow("Waiting for facebook response"));
       }
